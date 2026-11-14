@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">Mobile_Project</string>
+
+    <string name="details_title">Contact Details</string>
+    <string name="label_phone">Phone</string>
+    <string name="label_email">Email</string>
+    <string name="no_email">No email</string>
+    <string name="btn_call">Call</string>
+    <string name="btn_sms">SMS</string>
+    <string name="btn_email">Email</string>
+    <string name="label_favorite">Favorite</string>
+    <string name="btn_edit">Edit</string>
+    <string name="btn_delete">Delete</string>
+    <string name="delete_title">Delete Contact?</string>
+    <string name="delete_message">Are you sure you want to delete %1$s? This action cannot be undone.</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="contact_deleted">Contact deleted</string>
+    <string name="contact_not_found">Contact not found</string>
+    <string name="added_to_favorites">Added to favorites</string>
+    <string name="removed_from_favorites">Removed from favorites</string>
+    <string name="no_app_found">No app found to handle this action</string>
+    <string name="email_missing">This contact has no email</string>
+    <string name="cd_back">Back</string>
+    <string name="cd_avatar">Contact initials</string>
+    <string name="cd_favorite">Toggle favorite</string>
+    <string name="cd_call">Call contact</string>
+    <string name="cd_sms">Send SMS</string>
+    <string name="cd_email">Send email</string>
 </resources>

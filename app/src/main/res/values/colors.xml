@@ -15,4 +15,5 @@
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <dimen name="corner_radius">12dp</dimen>
 </resources>

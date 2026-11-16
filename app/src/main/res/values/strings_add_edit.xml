@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Strings for the Add / Edit Contact screen (kept in its own file so strings.xml is not touched) -->
+<resources>
+    <string name="add_title">Add Contact</string>
+    <string name="label_name_required">Name *</string>
+    <string name="label_phone_required">Phone *</string>
+    <string name="label_email_optional">Email (optional)</string>
+    <string name="hint_name">e.g. Ahmed Ali</string>
+    <string name="hint_phone">e.g. 01012345678</string>
+    <string name="hint_email">e.g. ahmed@example.com</string>
+    <string name="btn_save">Save</string>
+    <string name="error_name">Name must have at least 2 letters</string>
+    <string name="error_phone">Enter a valid phone number (01XXXXXXXXX)</string>
+    <string name="error_email">Enter a valid email address</string>
+    <string name="contact_saved">Contact saved</string>
+    <string name="fix_errors">Please fix the highlighted fields</string>
+</resources>

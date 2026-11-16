@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">Mobile_Project</string>
 
+    <!-- for Contact list (MainActivity) -->
+    <string name="list_title">Contact Manager</string>
+    <string name="list_subtitle">Your contacts, always close</string>
+    <string name="hint_search">Search by name or phone</string>
+    <string name="favorites_only">Favorites only</string>
+    <string name="btn_add">+ Add</string>
+    <string name="empty_title">No contacts yet</string>
+    <string name="empty_message">Tap the + button to add your first contact</string>
+    <string name="no_results">No contacts match your search</string>
+
     <string name="details_title">Contact Details</string>
     <string name="label_phone">Phone</string>
     <string name="label_email">Email</string>

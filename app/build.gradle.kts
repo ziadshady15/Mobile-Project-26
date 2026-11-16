@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     id("com.android.legacy-kapt") version "9.4.1"
+    id("org.jetbrains.kotlin.plugin.compose") version "2.2.10"
+
 }
 
 android {
@@ -31,6 +33,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    buildFeatures {
+        compose = true
+    }
+
 }
 
 dependencies {
@@ -46,4 +52,10 @@ dependencies {
     kapt("androidx.room:room-compiler:2.7.2")
     implementation("androidx.room:room-ktx:2.7.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+    implementation(platform("androidx.compose:compose-bom:2026.02.01"))
+    implementation("androidx.activity:activity-compose:1.13.0")
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    debugImplementation("androidx.compose.ui:ui-tooling")
 }

@@ -25,6 +25,9 @@
         <activity
             android:name=".AddEditContactActivity"
             android:exported="false" />
+        <activity
+            android:name=".AboutActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

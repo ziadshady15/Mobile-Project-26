@@ -23,7 +23,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-// Contact List screen (start screen of the app)
+// Contact List screen
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
 
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sharedPref: SharedPreferences
     private lateinit var adapter: ContactAdapter
 
-    // The contacts currently shown in the list (filled by loadContacts)
+    // contacts list
     private val contacts = mutableListOf<Contact>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,11 +59,11 @@ class MainActivity : AppCompatActivity() {
         db = ContactDatabase.getInstance(this)
         sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
-        // Bind adapter to ListView; the star button calls toggleFavorite (lambda callback)
+
         adapter = ContactAdapter(this, contacts) { contact -> toggleFavorite(contact) }
         listView.adapter = adapter
 
-        // Item click: open the Details screen with an explicit intent (Lab 03 / Lab 04)
+
         listView.setOnItemClickListener { _, _, position, _ ->
             val selectedContact = contacts[position]
             val intent = Intent(this, ContactDetailsActivity::class.java)
@@ -71,19 +71,19 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // "+ Add" opens the empty form (explicit intent, Lab 03)
+
         val btnAdd = findViewById<Button>(R.id.btn_add)
         btnAdd.setOnClickListener {
             startActivity(Intent(this, AddEditContactActivity::class.java))
         }
 
-        // About icon opens the Compose About screen
+
         val btnAbout = findViewById<ImageButton>(R.id.btn_about)
         btnAbout.setOnClickListener {
             startActivity(Intent(this, AboutActivity::class.java))
         }
 
-        // Restore the last "Favorites only" choice from SharedPreferences (Lab 04)
+
         switchFavorites.isChecked = sharedPref.getBoolean("favoritesOnly", false)
         switchFavorites.setOnCheckedChangeListener { _, isChecked ->
             val editor = sharedPref.edit()
@@ -92,14 +92,14 @@ class MainActivity : AppCompatActivity() {
             loadContacts()
         }
 
-        // Search while typing
+        // to search while typing
         etSearch.doAfterTextChanged { loadContacts() }
 
         loadContacts()
         Log.d(TAG, "OnCreate MainActivity")
     }
 
-    // Read contacts from Room on a background thread, then update the list on the main thread (Lab 04)
+
     private fun loadContacts() {
         val query = etSearch.text.toString().trim()
         val favoritesOnly = switchFavorites.isChecked
@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Show the "No contacts yet" message when the list is empty
+    // No contacts yet message when list is empty
     private fun showEmptyState(noFilter: Boolean) {
         if (contacts.isEmpty()) {
             listView.visibility = View.GONE
@@ -138,7 +138,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Star button in a row: flip isFavorite and save it in Room
     private fun toggleFavorite(contact: Contact) {
         lifecycleScope.launch(Dispatchers.IO) {
             db.contactDao().updateContact(contact.copy(isFavorite = !contact.isFavorite))
@@ -148,7 +147,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Activity lifecycle callbacks with logs (Lab 02)
     override fun onStart() {
         super.onStart()
         Log.d(TAG, "OnStart MainActivity")
@@ -169,7 +167,6 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "OnStop MainActivity")
     }
 
-    // Coming back from another screen: reload, the data may have changed (Lab 04)
     override fun onRestart() {
         super.onRestart()
         Log.d(TAG, "OnRestart MainActivity")

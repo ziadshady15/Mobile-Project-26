@@ -36,4 +36,7 @@
     <string name="cd_call">Call contact</string>
     <string name="cd_sms">Send SMS</string>
     <string name="cd_email">Send email</string>
+    <string name="cd_about">About the app</string>
+    <string name="cd_add">Add contact</string>
+    <string name="cd_search">Search</string>
 </resources>

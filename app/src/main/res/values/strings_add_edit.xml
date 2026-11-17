@@ -2,6 +2,7 @@
 <!-- Strings for the Add / Edit Contact screen (kept in its own file so strings.xml is not touched) -->
 <resources>
     <string name="add_title">Add Contact</string>
+    <string name="edit_title">Edit Contact</string>
     <string name="label_name_required">Name *</string>
     <string name="label_phone_required">Phone *</string>
     <string name="label_email_optional">Email (optional)</string>

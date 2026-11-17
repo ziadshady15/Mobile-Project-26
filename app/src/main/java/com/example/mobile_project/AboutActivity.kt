@@ -33,24 +33,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-// Colours of the app (same values as colors.xml), defined here so the screen is all in Compose
 private val PrimaryBlue = Color(0xFF6366F1)
 private val Background = Color(0xFFF8FAFC)
 private val Surface = Color(0xFFFFFFFF)
 private val TextPrimary = Color(0xFF0F172A)
 private val TextSecondary = Color(0xFF64748B)
-
-// Team members: replace with the real names and student IDs
 private val teamMembers = listOf(
     "Ziad Shady Nabil – 2023170235",
     "Fayrouz Waleed Farid – 2023170433",
     "Abdalah Mohamed Abdo – 2023170360",
     "Marina Joseph Ammar – 2023170465",
     "Ronaldo Rafik Rene – 2023170228",
-    "Mina Maged Adel – 2023170654"
-)
-
-// About screen: written only with Jetpack Compose (no XML layout)
+    "Mina Maged Adel – 2023170654")
 class AboutActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +57,6 @@ class AboutActivity : ComponentActivity() {
         }
     }
 }
-
 @Composable
 fun AboutScreen(onBack: () -> Unit) {
     Column(
@@ -72,7 +65,6 @@ fun AboutScreen(onBack: () -> Unit) {
             .background(Background)
             .systemBarsPadding()
     ) {
-        // App bar (same look as the XML screens)
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -95,7 +87,6 @@ fun AboutScreen(onBack: () -> Unit) {
                 fontWeight = FontWeight.Bold
             )
         }
-
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
@@ -135,35 +126,30 @@ fun AboutScreen(onBack: () -> Unit) {
         }
     }
 }
-
-// White rounded card with the team list
 @Composable
 fun TeamCard() {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = Surface)
-    ) {
+        colors = CardDefaults.cardColors(containerColor = Surface)) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
                 text = "Team",
                 color = TextPrimary,
                 fontSize = 18.sp,
-                fontWeight = FontWeight.Bold
-            )
+                fontWeight = FontWeight.Bold)
             teamMembers.forEachIndexed { index, member ->
                 Text(
                     text = "${index + 1}. $member",
                     color = TextPrimary,
                     fontSize = 16.sp,
-                    modifier = Modifier.padding(top = 8.dp)
-                )
+                    modifier = Modifier.padding(top = 8.dp))
             }
         }
     }
 }
 
-// Shows the screen in Android Studio's design preview
+
 @Preview(showBackground = true)
 @Composable
 fun AboutScreenPreview() {

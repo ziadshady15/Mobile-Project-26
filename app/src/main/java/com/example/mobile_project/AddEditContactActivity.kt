@@ -16,7 +16,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-// Add Contact screen (Edit mode is added later in the same screen)
 class AddEditContactActivity : AppCompatActivity() {
     private lateinit var etName: EditText
     private lateinit var etPhone: EditText
@@ -27,6 +26,9 @@ class AddEditContactActivity : AppCompatActivity() {
     private lateinit var db: ContactDatabase
 
     private val validator = ContactValidator()
+
+    private var contactId = 0
+    private var isFavorite = false
     private var errorsShown = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +36,6 @@ class AddEditContactActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_add_edit_contact)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            // ime() = keyboard: keeps the form above the keyboard
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.ime())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -46,13 +47,25 @@ class AddEditContactActivity : AppCompatActivity() {
         txtNameError = findViewById(R.id.txt_name_error)
         txtPhoneError = findViewById(R.id.txt_phone_error)
         txtEmailError = findViewById(R.id.txt_email_error)
+        val txtTitle = findViewById<TextView>(R.id.txt_title)
         val btnBack = findViewById<ImageButton>(R.id.btn_back)
         val btnCancel = findViewById<Button>(R.id.btn_cancel)
         val btnSave = findViewById<Button>(R.id.btn_save)
 
         db = ContactDatabase.getInstance(this)
 
-        // After rotation: restore what the user typed (Lab 02 hands-on)
+        val extras = intent.extras
+        if (extras != null && extras.containsKey("contactId")) {
+            contactId = extras.getInt("contactId", 0)
+            isFavorite = extras.getBoolean("isFavorite", false)
+            txtTitle.setText(R.string.edit_title)
+            if (savedInstanceState == null) {
+                etName.setText(extras.getString("name"))
+                etPhone.setText(extras.getString("phone"))
+                etEmail.setText(extras.getString("email"))
+            }
+        }
+
         savedInstanceState?.let {
             etName.setText(it.getString("name"))
             etPhone.setText(it.getString("phone"))
@@ -63,12 +76,10 @@ class AddEditContactActivity : AppCompatActivity() {
         }
 
         btnSave.setOnClickListener { saveContact() }
-        // Cancel and back discard the form
         btnCancel.setOnClickListener { finish() }
         btnBack.setOnClickListener { finish() }
     }
 
-    // Save the form before the activity is destroyed (e.g. rotation) (Lab 02)
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString("name", etName.text.toString())
@@ -77,7 +88,6 @@ class AddEditContactActivity : AppCompatActivity() {
         outState.putBoolean("errorsShown", errorsShown)
     }
 
-    // Check every field with ContactValidator; show the red error under each wrong field
     private fun validateForm(): Boolean {
         errorsShown = true
         val nameOk = validator.isValidName(etName.text.toString().trim())
@@ -88,7 +98,7 @@ class AddEditContactActivity : AppCompatActivity() {
         showFieldError(etPhone, txtPhoneError, phoneOk)
         showFieldError(etEmail, txtEmailError, emailOk)
 
-        // Put the cursor in the first wrong field
+
         when {
             !nameOk -> etName.requestFocus()
             !phoneOk -> etPhone.requestFocus()
@@ -102,7 +112,6 @@ class AddEditContactActivity : AppCompatActivity() {
         field.setBackgroundResource(if (isValid) R.drawable.bg_input else R.drawable.bg_input_error)
     }
 
-    // Insert the new contact in Room, then go back (Lab 04)
     private fun saveContact() {
         if (!validateForm()) {
             Toast.makeText(this, R.string.fix_errors, Toast.LENGTH_SHORT).show()
@@ -110,13 +119,19 @@ class AddEditContactActivity : AppCompatActivity() {
         }
 
         val contact = Contact(
+            id = contactId,
             name = etName.text.toString().trim(),
             phone = validator.cleanPhone(etPhone.text.toString().trim()),
-            email = etEmail.text.toString().trim()
+            email = etEmail.text.toString().trim(),
+            isFavorite = isFavorite
         )
 
         lifecycleScope.launch(Dispatchers.IO) {
-            db.contactDao().insertContact(contact)
+            if (contactId == 0) {
+                db.contactDao().insertContact(contact)
+            } else {
+                db.contactDao().updateContact(contact)
+            }
             withContext(Dispatchers.Main) {
                 Toast.makeText(this@AddEditContactActivity, R.string.contact_saved, Toast.LENGTH_SHORT).show()
                 finish()

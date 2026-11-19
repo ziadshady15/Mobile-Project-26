@@ -110,7 +110,7 @@ fun AboutScreen(onBack: () -> Unit) {
                 fontSize = 16.sp
             )
             Text(
-                text = "FNI-421 Mobile Computing",
+                text = "Mobile Computing",
                 color = PrimaryBlue,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold

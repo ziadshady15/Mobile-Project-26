@@ -1,7 +1,6 @@
 # Contact Manager
 
-An offline Android app to save, search and reach your contacts.
-Course project for **FNI-421 Mobile Computing**, Ain Shams University (2025–2026).
+An Android app to save, search and reach your contacts.
 
 ## Features
 
@@ -66,5 +65,3 @@ One Room table, `contacts`:
 | Marina Joseph Ammar | 2023170465 | Contact list, search, favorites filter, adapter |
 | Ronaldo Rafik Rene | 2023170228 | Room database (entity, DAO, database) |
 | Mina Maged Adel | 2023170654 | About screen (Jetpack Compose) |
-
-We worked with feature branches and GitHub pull requests: each part was built on its own branch and merged into `main`.

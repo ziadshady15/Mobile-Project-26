@@ -19,17 +19,6 @@ Course project for **FNI-421 Mobile Computing**, Ain Shams University (2025–20
 - **Delete** with a confirmation dialog.
 - **About** screen built with **Jetpack Compose**, showing the app, course and team info.
 
-## Built with
-
-| | |
-|---|---|
-| Language | Kotlin |
-| UI | XML layouts (4 screens) + Jetpack Compose (About screen), Material 3 |
-| Database | Room 2.7.2 (entity, DAO, singleton database) |
-| Background work | Kotlin coroutines (`lifecycleScope`, `Dispatchers.IO` / `Main`) |
-| Settings | SharedPreferences |
-| Navigation | Explicit intents with extras; implicit intents (`ACTION_DIAL`, `ACTION_SENDTO`) |
-| Build | Android Gradle Plugin 9.4.1, Kotlin DSL, minSdk 24, targetSdk 37 |
 
 ## Screens
 
